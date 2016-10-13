@@ -10,6 +10,7 @@ library(shinyBS)
 library(leaflet)
 library(RColorBrewer)
 library(mapview)
+library(htmlwidgets)
 
 
 
@@ -31,6 +32,7 @@ redDrumLateJuvenile <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu741ln000g
 redDrumAdult <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu7a0o0200002jpcl9oc0sqi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
 ##red drum juvenile
 ## color code : E0E30C
+##  #5BE15D  adults
 
 ##not used yet: software conflict?
 addMouseCoordinates2 <- function (map)

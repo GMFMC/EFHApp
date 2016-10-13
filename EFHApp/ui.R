@@ -21,9 +21,9 @@ ui <- dashboardPage(
         selectInput("selectSpecies", h3("Select species:"),
                     c("Red drum" = "REDDRUM",
                       #"Red snapper" = "REDSNAPPER",
-                      selected = "Red drum"))),
-      style="text-align: center;")
-    
+                      selected = "Red drum")))#,
+      #style="text-align: center;")
+    )
     
   ),
   dashboardBody(
@@ -67,20 +67,49 @@ ui <- dashboardPage(
                             
                             ###Theoretically the selectInput would work like below, currently not operational ##
                             div(
-                              selectInput("lifeStage", "Life Stage:",
-                                          c(
-                                            # c("Larvae" = "l",
-                                            #   "Postlarvae"='pL',
-                                            #   "Early Juveniles"="eJ",
-                                            #"Late Juveniles"="lJ",
-                                            #"Spawning Adults" = "spAd"),
-                                            "Late Juveniles" = "redDrumLateJuvenile",
-                                            "Adults" = "redDrumAdult",
-                                            "Spawning Adults" = "redDrumSpawningAdult"), ##JF
-                                          multiple=FALSE, selected = "redDrumSpawningAdult"))),
-              style="text-align: center;")
+                              
+                              ############## Add radio buttons instead of SelectInput ############
+              #                 selectInput("lifeStage", "Life Stage:",
+              #                             c(
+              #                               # c("Larvae" = "l",
+              #                               #   "Postlarvae"='pL',
+              #                               #   "Early Juveniles"="eJ",
+              #                               #"Late Juveniles"="lJ",
+              #                               #"Spawning Adults" = "spAd"),
+              #                               "Late Juveniles" = "redDrumLateJuvenile",
+              #                               "Adults" = "redDrumAdult",
+              #                               "Spawning Adults" = "redDrumSpawningAdult"), ##JF
+              #                             multiple=FALSE, selected = "redDrumSpawningAdult"))),
+              # style="text-align: center;")
+              
+              # radioButtons("lifeStage", label = "Life Stage:",
+              #              
+              #              c("Late Juveniles" = "redDrumLateJuvenile",
+              #                "Adults" = "redDrumAdult",
+              #                "Spawning Adults" = "redDrumSpawningAdult"),
+              #              selected = "redDrumSpawningAdult")),
+              tags$div(HTML('
+                 <div id="lifeStage" class="form-group shiny-input-radiogroup shiny-input-container">
+                            <label class="control-label" for="rating">Life Stage:</label>
+                            <div class="shiny-options-group">
+                            <div class="radio">
+                            <input type="radio" name="redDrumLateJuvenile" id="redDrumLateJuvenile" value="redDrumLateJuvenile" />
+                            <label for="redDrumLateJuvenile"><table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #000000; stroke: #000000; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Late juvenile</td></tr></table></label>
+                            </div>
+                            <div class="radio">
+                            <input type="radio" name="site" id="ad" value="stackoverflow" />
+                            <label for="ad"><table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #5BE15D; stroke: #5BE15D; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Adults</td></tr></table></label>
+                            </div>
+                            <div class="radio">
+                            <input type="radio" name="site" id="sp" value="stackoverflow" />
+                            <label for="sp"><table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #E13333; stroke: #E13333; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Spawning adults</td></tr></table></label>
+                            </div>
+                            </div>
+                            </div>
+                            </div>'))),
+              style = "text-align: left;")
+      
+      #<span><i class="fa fa-star" aria-hidden="true"></i></span></label>
       
       
-      
-      
-    )))
+    ))))
