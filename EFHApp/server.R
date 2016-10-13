@@ -77,6 +77,8 @@ server <- function(input, output) {
   #   }
   #     })
   
+  
+  
   output$map <- renderLeaflet({  
     
     
