@@ -10,17 +10,17 @@
 server <- function(input, output) {  
   
   ## Species Profiles ##
-  output$prof <- renderUI({
-    tags$iframe(src = "reddrumSpeciesProfile.html", seamless=NA,width="100%", height = 600,frameborder=0)
-  })
+  # output$prof <- renderUI({
+  #   tags$iframe(src = "reddrumSpeciesProfile.html", seamless=NA,width="100%", height = 600,frameborder=0)
+  # })
   
-  output$leng <- renderUI({
-    tags$iframe(src = "RedDrum.html", seamless=NA,  width="100%", height = 275,frameborder=0)
-  })
+  # output$leng <- renderUI({
+  #   tags$iframe(src = "RedDrum.html", seamless=NA,  width="100%", height = 275,frameborder=0)
+  # })
   
-  output$land <- renderUI({
-    tags$iframe(src = "RDland.html", seamless=NA,  width="100%", height = 275,frameborder=0)
-  })
+  # output$land <- renderUI({
+  #   tags$iframe(src = "RDland.html", seamless=NA,  width="100%", height = 275,frameborder=0)
+  # })
   
   ## Habitat Association Table ##
   
@@ -77,8 +77,6 @@ server <- function(input, output) {
   #   }
   #     })
   
-  
-  
   output$map <- renderLeaflet({  
     
     
@@ -100,8 +98,7 @@ server <- function(input, output) {
                     '<table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #000000; stroke: #000000; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Late juvenile</td></tr></table>,
                   <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #5BE15D; stroke: #5BE15D; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Adults</td></tr></table>,
                   <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #E13333; stroke: #E13333; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Spawning adults</td></tr></table>',
-                  position=c("bottomleft")) %>% 
-      addMouseCoordinates2()
+                  position=c("bottomleft"))
     
     # addLayersControl(
     #      overlayGroups = c(GROUP))
@@ -128,4 +125,46 @@ server <- function(input, output) {
   # 
   # })
   
-}
+  ############### select by species
+  profile <-reactive({
+    switch(input$selectSpecies,
+           "REDDRUM" = reddrumProfile,
+           "REDSNAPPER" = test#,
+           # "redDrumSpawningAdult"=redDrumSpawningAdult)
+    )
+  })
+  
+  output$prof <- renderUI({
+    tags$iframe(src = profile(), seamless=NA,width="100%", height = 600,frameborder=0)
+  })
+  ###########
+  
+  ############################### age growth ########################### 
+  agegrowth <-reactive({
+    switch(input$selectSpecies,
+           "REDDRUM" = reddrumAgeGrowth,
+           "REDSNAPPER" = testAgeGrowth#,
+           # add other species here)
+    )
+  })
+  
+  output$leng <- renderUI({
+    tags$iframe(src = agegrowth(), seamless=NA,  width="100%", height = 275,frameborder=0)
+  })
+  ############################### end age growth ########################### 
+  
+  ############################### landings ########################### 
+  landings <-reactive({
+    switch(input$selectSpecies,
+           "REDDRUM" = reddrumLandings,
+           "REDSNAPPER" = testLandings#,
+           # add other species here)
+    )
+  })
+  
+  output$land <- renderUI({
+    tags$iframe(src = landings(), seamless=NA,  width="100%", height = 275,frameborder=0)
+  })
+  ############################### end landings ########################### 
+  
+} ## end server

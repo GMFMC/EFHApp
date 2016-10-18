@@ -10,7 +10,6 @@ library(shinyBS)
 library(leaflet)
 library(RColorBrewer)
 library(mapview)
-library(htmlwidgets)
 
 
 
@@ -32,7 +31,6 @@ redDrumLateJuvenile <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu741ln000g
 redDrumAdult <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu7a0o0200002jpcl9oc0sqi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
 ##red drum juvenile
 ## color code : E0E30C
-##  #5BE15D  adults
 
 ##not used yet: software conflict?
 addMouseCoordinates2 <- function (map)
@@ -44,4 +42,47 @@ addMouseCoordinates2 <- function (map)
   map
 }
 
-##  #5BE15D  adults
+############ Species Profile ###################################
+### This can be used to  load species profiles via selection
+### Would need to load the profile for each species
+### Populate selectSpecies in ui.R and profile (reactive) in server.R
+reddrumProfile <- "reddrumSpeciesProfile.html"
+test <- "test.html"
+
+## load  others, delete test. For now test linked to red snapper
+############ Species Profile ###################################
+
+############ Species age growth chart ###################################
+### This can be used to select age growth chart via species selection
+### Would need to load the profile for each species
+### Populate selectSpecies in ui.R and profile (reactive) in server.R
+reddrumAgeGrowth <- "RedDrum.html"
+testAgeGrowth <- "testAgeGrowth.html"
+
+## load  others, delete test. For now test linked to red snapper
+############ Species Profile ###################################
+
+############ Species landings chart ###################################
+### This can be used to select age growth chart via species selection
+### Would need to load the profile for each species
+### Populate selectSpecies in ui.R and profile (reactive) in server.R
+reddrumLandings <- "RDland.html"
+testLandings <- "testAgeGrowth.html"
+
+## load  others, delete test. For now test linked to red snapper
+############ Species Profile ###################################
+
+############ Species landings chart ###################################
+### This can be used to select age growth chart via species selection
+### Would need to load the profile for each species
+### Populate selectSpecies in ui.R and profile (reactive) in server.R
+reddrumHat <- "reddrum_HAT.pdf"
+testHat <- "testHat.pdf"
+
+##start here: need to add server code for this
+
+## load  others, delete test. For now test linked to red snapper
+############ Species Profile ###################################
+
+
+##  #5BE15D  adults color code
