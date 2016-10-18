@@ -16,16 +16,19 @@ ui <- dashboardPage(
       menuItem("Bibliography",tabName="bib"),
       menuItem("Habitat Maps",tabName="map"),
       tags$hr(style="border-color: white;"),
+      tags$head(includeCSS("efhStyle.css")),
       #div(h3("Select species"),style="text-align: center;"),
       div(
         selectInput("selectSpecies", h3("Select species:"),
                     c("Red drum" = "REDDRUM",
                       "Red snapper" = "REDSNAPPER",
                       selected = "Red drum"))),
-      style="text-align: center;")
+      tags$hr(style="text-align: center;"),
+    
+    div(img(src="logo.png"), style="text-align: center;")
     
     
-  ),
+  )),
   dashboardBody(
     tabItems(
       
@@ -34,8 +37,8 @@ ui <- dashboardPage(
               fluidRow(
                 
                 column(width=7,
-                       box(htmlOutput("prof")
-                           ,height=625,width=NULL)),
+                       box(htmlOutput("prof"),
+                           height=625,width=NULL)),
                 
                 column(width=5,
                        box(htmlOutput("leng"),height=300,width=NULL),

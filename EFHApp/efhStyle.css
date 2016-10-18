@@ -1,0 +1,35 @@
+
+/* color for sidebar */
+
+.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+    background-color: #808080;
+}
+
+.skin-blue .sidebar a {
+    color: #fff;
+	font-weight: 300;
+}
+
+/* color for top bar */
+
+.skin-blue .main-header .navbar {
+    background-color: #004890;
+}
+
+/* color for "logo"; area with Essential Fish Habitat text */
+
+.skin-blue .main-header .logo {
+    background-color: #004890;
+    color: #fff;
+    border-bottom: 0 solid transparent;
+	font-weight: 400;
+}
+
+/* hover color for sidebar menu */
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+    color: #fff;
+	font-weight: 300;
+    background: #1890a8;
+    border-left-color: #3c8dbc;
+}

@@ -82,8 +82,10 @@ server <- function(input, output) {
     
     map <- leaflet() %>% 
       
-      addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}',
-               options = list(providerTileOptions(noWrap = TRUE)) ) %>%
+      addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+               options = providerTileOptions(noWrap = TRUE)) %>%
+      addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/Mapserver/tile/{z}/{y}/{x}',
+               options = providerTileOptions(noWrap = TRUE)) %>%
       
       setView(-85, 27.75, zoom = 6) %>% 
       addScaleBar(position="bottomright") %>% 
