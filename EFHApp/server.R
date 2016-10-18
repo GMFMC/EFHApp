@@ -24,9 +24,9 @@ server <- function(input, output) {
   
   ## Habitat Association Table ##
   
-  output$HAT <- renderUI({
-    tags$iframe(src = "reddrum_HAT.pdf", seamless=NA,  width="100%", height = 600,frameborder=0)
-  })
+  # output$HAT <- renderUI({
+  #   tags$iframe(src = "reddrum_HAT.pdf", seamless=NA,  width="100%", height = 600,frameborder=0)
+  # })
   
   ## bibliography ##
   output$tbl1 <- DT::renderDataTable(y)
@@ -127,11 +127,25 @@ server <- function(input, output) {
   # 
   # })
   
+  #####################Select HAT##########
+  
+  HAT <- reactive({
+    switch(input$selectSpecies,
+           "REDDRUM" = reddrumHat,
+           "REDSNAPPER" = redsnapperHat#,
+           # "redDrumSpawningAdult"=redDrumSpawningAdult)
+    )
+  })
+  
+  output$HAT <- renderUI({
+    tags$iframe(src = HAT(), seamless=NA,  width="100%", height = 600,frameborder=0)
+  })
+  
   ############### select by species
   profile <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumProfile,
-           "REDSNAPPER" = test#,
+           "REDSNAPPER" = redsnapperProfile#,
            # "redDrumSpawningAdult"=redDrumSpawningAdult)
     )
   })
@@ -145,7 +159,7 @@ server <- function(input, output) {
   agegrowth <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumAgeGrowth,
-           "REDSNAPPER" = testAgeGrowth#,
+           "REDSNAPPER" = redsnapperAgeGrowth#,
            # add other species here)
     )
   })
@@ -159,7 +173,7 @@ server <- function(input, output) {
   landings <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumLandings,
-           "REDSNAPPER" = testLandings#,
+           "REDSNAPPER" = redsnapperLandings#,
            # add other species here)
     )
   })

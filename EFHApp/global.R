@@ -47,7 +47,7 @@ addMouseCoordinates2 <- function (map)
 ### Would need to load the profile for each species
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
 reddrumProfile <- "reddrumSpeciesProfile.html"
-test <- "test.html"
+redsnapperProfile <- "redsnapperSpeciesProfile.html"
 
 ## load  others, delete test. For now test linked to red snapper
 ############ Species Profile ###################################
@@ -57,7 +57,7 @@ test <- "test.html"
 ### Would need to load the profile for each species
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
 reddrumAgeGrowth <- "RedDrum.html"
-testAgeGrowth <- "testAgeGrowth.html"
+redsnapperAgeGrowth <- "RedSnapper.html"
 
 ## load  others, delete test. For now test linked to red snapper
 ############ Species Profile ###################################
@@ -67,7 +67,7 @@ testAgeGrowth <- "testAgeGrowth.html"
 ### Would need to load the profile for each species
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
 reddrumLandings <- "RDland.html"
-testLandings <- "testAgeGrowth.html"
+redsnapperLandings <- "RSland.html"
 
 ## load  others, delete test. For now test linked to red snapper
 ############ Species Profile ###################################
@@ -77,7 +77,7 @@ testLandings <- "testAgeGrowth.html"
 ### Would need to load the profile for each species
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
 reddrumHat <- "reddrum_HAT.pdf"
-testHat <- "testHat.pdf"
+redsnapperHat <- "redsnapper_HAT.pdf"
 
 ##start here: need to add server code for this
 
