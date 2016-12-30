@@ -1,4 +1,4 @@
-#setwd("C:/Users/claire.GMFMC/Desktop/R (2)/R/EFHwGit/EFHApp")
+#setwd("C:/Users/claire.GMFMC/Desktop/R (2)/R/EFHwGit/EFHApp2/EFHApp")
 
 library(shiny)
 library(shinydashboard)
@@ -84,6 +84,9 @@ redsnapperLandings <- "RSland.html"
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
 reddrumHat <- "reddrum_HAT.pdf"
 redsnapperHat <- "redsnapper_HAT.pdf"
+cobiaHat <- "cobia_HAT.pdf"
+spanishHat <- "spanish_HAT.pdf"
+kingHat <- "king_HAT.pdf"
 
 ##start here: need to add server code for this
 

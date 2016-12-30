@@ -134,7 +134,10 @@ server <- function(input, output) {
   HAT <- reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumHat,
-           "REDSNAPPER" = redsnapperHat#,
+           "REDSNAPPER" = redsnapperHat,
+           "COBIA" = cobiaHat,
+           "KINGMACKEREL" = kingHat,
+           "SPANISHMACKEREL" = spanishHat#,
            # "redDrumSpawningAdult"=redDrumSpawningAdult)
     )
   })
