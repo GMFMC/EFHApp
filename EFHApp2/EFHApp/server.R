@@ -50,7 +50,8 @@ server <- function(input, output) {
            "redDrumLateJuvenile" = redDrumLateJuvenile,
            "redDrumAdult" = redDrumAdult,
            "redDrumSpawningAdult"=redDrumSpawningAdult,
-           "redSnapperSpawningAdult"=redSnapperSpawningAdult)
+           "redSnapperSpawningAdult"=redSnapperSpawningAdult,
+           "redSnapperLateJuvenile"=redSnapperLateJuvenile)
   })
   # colorpal <- reactive({
   #   colorNumeric("BuPu",Select2()$Id)
@@ -92,7 +93,7 @@ server <- function(input, output) {
       addScaleBar(position="bottomright") %>% 
       #addPolygons(fillColor="#E1AF00", data =ad)
       addTiles(
-        #redDrumSpawningAdult,
+        #redSnapperLateJuvenile %>%   
         Select2()) %>%
       
       
@@ -146,7 +147,10 @@ server <- function(input, output) {
   profile <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumProfile,
-           "REDSNAPPER" = redsnapperProfile#,
+           "REDSNAPPER" = redsnapperProfile,
+           "COBIA" = cobiaProfile,
+           "KINGMACKEREL" = kingProfile,
+           "SPANISHMACKEREL" = spanishProfile
            # "redDrumSpawningAdult"=redDrumSpawningAdult)
     )
   })

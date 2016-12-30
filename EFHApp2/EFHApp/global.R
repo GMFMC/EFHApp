@@ -1,4 +1,4 @@
-#setwd("C:/Users/claire.GMFMC/Desktop/R (2)/R/EFHApp")
+#setwd("C:/Users/claire.GMFMC/Desktop/R (2)/R/EFHwGit/EFHApp")
 
 library(shiny)
 library(shinydashboard)
@@ -30,6 +30,7 @@ redDrumSpawningAdult <-  "https://api.mapbox.com/styles/v1/jfroeschke/ciu703yi50
 redDrumLateJuvenile <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu741ln000g82jo146xsrn21/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
 redDrumAdult <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu7a0o0200002jpcl9oc0sqi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
 redSnapperSpawningAdult <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh70a6000s2imlw05lzaog/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
+redSnapperLateJuvenile <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh3ph6001m2io26uyalgi2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
 ##red drum juvenile
 ## color code : E0E30C
 
@@ -47,8 +48,12 @@ addMouseCoordinates2 <- function (map)
 ### This can be used to  load species profiles via selection
 ### Would need to load the profile for each species
 ### Populate selectSpecies in ui.R and profile (reactive) in server.R
+
 reddrumProfile <- "reddrumSpeciesProfile.html"
 redsnapperProfile <- "redsnapperSpeciesProfile.html"
+cobiaProfile <- "cobiaSpeciesProfile.html"
+spanishProfile <- "spanishmackerelSpeciesProfile.html"
+kingProfile<- "kingmackerelSpeciesProfile.html"
 
 ## load  others, delete test. For now test linked to red snapper
 ############ Species Profile ###################################

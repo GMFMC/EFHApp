@@ -22,7 +22,10 @@ ui <- dashboardPage(
         selectInput("selectSpecies", h3("Select species:"),
                     c("Red drum" = "REDDRUM",
                       "Red snapper" = "REDSNAPPER",
-                      selected = "Red drum"))),
+                      "King mackerel" = "KINGMACKEREL",
+                      "Spanish mackerel" = "SPANISHMACKEREL",
+                      "Cobia" = "COBIA"),
+                      selected = "Red drum")),
       tags$hr(style="text-align: center;"),
     
     div(img(src="logo.png"), style="text-align: center;")
