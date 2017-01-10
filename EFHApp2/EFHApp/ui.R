@@ -24,7 +24,42 @@ ui <- dashboardPage(
                       "Red snapper" = "REDSNAPPER",
                       "King mackerel" = "KINGMACKEREL",
                       "Spanish mackerel" = "SPANISHMACKEREL",
-                      "Cobia" = "COBIA"),
+                      "Cobia" = "COBIA",
+                      "Almaco jack" = "ALMACOJACK",
+                      "Banded rudderfish" = "BANDEDRUDDERFISH" ,
+                      "Greater amberjack" = "GREATERAMBERJACK",
+                      "Lesser amberjack" = "LESSERAMBERJACK",
+                      "Brown shrimp" = "BROWNSHRIMP",
+                      "Pink shrimp" = "PINKSHRIMP",
+                      "White shrimp" = "WHITESHRIMP",
+                      "Royal red shrimp"= "ROYALREDSHRIMP",
+                      "Spiny lobster" = "SPINYLOBSTER",
+                      "Queen snapper" = "QUEENSNAPPER",
+                      "Mutton snapper" = "MUTTONSNAPPER",
+                      "Blackfin snapper" = "BLACKFINSNAPPER",
+                      "Cubera snapper" = "CUBERASNAPPER",
+                      "Gray snapper" = "GRAYSNAPPER",
+                      "Silk snapper" = "SILKSNAPPER",
+                      "Yellowtail snapper" = "YELLOWTAILSNAPPER",
+                      "Wenchman" = "WENCHMAN",
+                      "Vermilion snapper" = "VERMILIONSNAPPER",
+                      "Speckled hind" = "SPECKLEDHIND",
+                      "Goliath grouper" = "GOLIATHGROUPER",
+                      "Red grouper" = "REDGROUPER",
+                      "Yellowedge grouper" = "YELLOWEDGEGROUPER",
+                      "Warsaw grouper" = "WARSAWGROUPER",
+                      "Snowy grouper" = "SNOWYGROUPER",
+                      "Black grouper" = "BLACKGROUPER",
+                      "Yellowmouth grouper" = "YELLOWMOUTHGROUPER",
+                      "Gag" = "GAG",
+                      "Scamp" = "SCAMP",
+                      "Yellowfin grouper" = "YELLOWFINGROUPER",
+                      "Goldface tilefish" = "GOLDFACETILEFISH",
+                      "Blueline tilefish" = "BLUELINETILEFISH",
+                      "Tilefish (Golden tilefish)" = "TILEFISH",
+                      "Gray triggerfish" = "GRAYTRIGGERFISH",
+                      "Hogfish" = "HOGFISH"
+                    ),
                       selected = "Red drum")),
       tags$hr(style="text-align: center;"),
     
@@ -33,6 +68,8 @@ ui <- dashboardPage(
     
   )),
   dashboardBody(
+     tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
+     #tags$style(type = "text/css", "#sp {height: calc(100vh - 80px) !important;}"),
     tabItems(
       
       ## species profiles ##
@@ -40,8 +77,8 @@ ui <- dashboardPage(
               fluidRow(
                 
                 column(width=7,
-                       box(htmlOutput("prof"),
-                           height=625,width=NULL)),
+                       box(htmlOutput("prof"), style = "height: calc(100vh-80px)",
+                           width=NULL)),
                 
                 column(width=5,
                        box(htmlOutput("leng"),height=300,width=NULL),
@@ -52,9 +89,10 @@ ui <- dashboardPage(
       
       ## HAT ##
       tabItem(tabName="HAT",
-              htmlOutput("HAT")
+              htmlOutput("HAT",height=600)
+            
               
-              # box(htmlOutput("HAT"),height=625,width=NULL))
+               #box(htmlOutput("HAT"),height=625)),
       ),
       ## bibliography ##
       tabItem(tabName="bib",

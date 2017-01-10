@@ -44,49 +44,9 @@ addMouseCoordinates2 <- function (map)
   map
 }
 
-############ Species Profile ###################################
-### This can be used to  load species profiles via selection
-### Would need to load the profile for each species
-### Populate selectSpecies in ui.R and profile (reactive) in server.R
+source("r.R") ######### this file contains code to load species profiles, HATs, landings/von bert charts #########
 
-reddrumProfile <- "reddrumSpeciesProfile.html"
-redsnapperProfile <- "redsnapperSpeciesProfile.html"
-cobiaProfile <- "cobiaSpeciesProfile.html"
-spanishProfile <- "spanishmackerelSpeciesProfile.html"
-kingProfile<- "kingmackerelSpeciesProfile.html"
 
-## load  others, delete test. For now test linked to red snapper
-############ Species Profile ###################################
-
-############ Species age growth chart ###################################
-### This can be used to select age growth chart via species selection
-### Would need to load the profile for each species
-### Populate selectSpecies in ui.R and profile (reactive) in server.R
-reddrumAgeGrowth <- "RedDrum.html"
-redsnapperAgeGrowth <- "RedSnapper.html"
-
-## load  others, delete test. For now test linked to red snapper
-############ Species Profile ###################################
-
-############ Species landings chart ###################################
-### This can be used to select age growth chart via species selection
-### Would need to load the profile for each species
-### Populate selectSpecies in ui.R and profile (reactive) in server.R
-reddrumLandings <- "RDland.html"
-redsnapperLandings <- "RSland.html"
-
-## load  others, delete test. For now test linked to red snapper
-############ Species Profile ###################################
-
-############ Species landings chart ###################################
-### This can be used to select age growth chart via species selection
-### Would need to load the profile for each species
-### Populate selectSpecies in ui.R and profile (reactive) in server.R
-reddrumHat <- "reddrum_HAT.pdf"
-redsnapperHat <- "redsnapper_HAT.pdf"
-cobiaHat <- "cobia_HAT.pdf"
-spanishHat <- "spanish_HAT.pdf"
-kingHat <- "king_HAT.pdf"
 
 ##start here: need to add server code for this
 

@@ -137,13 +137,48 @@ server <- function(input, output) {
            "REDSNAPPER" = redsnapperHat,
            "COBIA" = cobiaHat,
            "KINGMACKEREL" = kingHat,
-           "SPANISHMACKEREL" = spanishHat#,
+           "SPANISHMACKEREL" = spanishHat,
+           "ALMACOJACK" = almacoHat,
+           "BANDEDRUDDERFISH" = rudderfishHat,
+           "GREATERAMBERJACK" = greaterAJHat,
+           "LESSERAMBERJACK" = lesserAJHat,
+           "BROWNSHRIMP" = brownshrimpHat,
+           "WHITESHRIMP" = whiteshrimpHat,
+           'PINKSHRIMP' = pinkshrimpHat,
+           "ROYALREDSHRIMP" = royalredHat,
+           "SPINYLOBSTER" = spinyHat,
+           "QUEENSNAPPER" = queenHat,
+           "MUTTONSNAPPER" = muttonHat,
+           "BLACKFINSNAPPER"= blackfinHat,
+           "CUBERASNAPPER" = cuberaHat,
+           "GRAYSNAPPER" = graysnapperHat,
+           "LANESNAPPER" = laneHat,
+           "SILKSNAPPER" = silkHat,
+           "YELLOWTAILSNAPPER" = yellowtailsnapperHat,
+           "WENCHMAN" = wenchmanHat,
+           "VERMILIONSNAPPER" = vermilionHat,
+           "SPECKLEDHIND" = speckledHat,
+           "GOLIATHGROUPER" = goliathHat,
+           "REDGROUPER" = redgrouperHat,
+           "YELLOWEDGEGROUPER" = yellowedgeHat,
+           "WARSAWGROUPER" = warsawHat,
+           "SNOWYGROUPER" = snowyHat,
+           "BLACKGROUPER" = blackHat,
+           "YELLOWMOUTHGROUPER" = yellowmouthHat,
+           "GAG" = gagHat,
+           "SCAMP" = scampHat,
+           "YELLOWFINGROUPER" = yellowfinHat,
+           "GOLDFACETILEFISH" = goldfaceHat,
+           "BLUELINETILEFISH" = bluelineHat,
+           "TILEFISH" = tilefishHat,
+           "GRAYTRIGGERFISH" = graytriggerfishHat,
+           "HOGFISH" = hogfishHat
            # "redDrumSpawningAdult"=redDrumSpawningAdult)
     )
   })
   
   output$HAT <- renderUI({
-    tags$iframe(src = HAT(), seamless=NA,  width="100%", height = 600,frameborder=0)
+    tags$iframe(src = HAT(), seamless=NA, style="height: calc(100vh - 80px)",  width="100%",frameborder=0)
   })
   
   ############### select by species
@@ -153,13 +188,48 @@ server <- function(input, output) {
            "REDSNAPPER" = redsnapperProfile,
            "COBIA" = cobiaProfile,
            "KINGMACKEREL" = kingProfile,
-           "SPANISHMACKEREL" = spanishProfile
+           "SPANISHMACKEREL" = spanishProfile,
+           "ALMACOJACK" = almacoProfile,
+           "BANDEDRUDDERFISH" = rudderfishProfile,
+           "GREATERAMBERJACK" = greaterAJProfile,
+           "LESSERAMBERJACK" = lesserAJProfile,
+           "BROWNSHRIMP" = brownshrimpProfile,
+           "WHITESHRIMP" = whiteshrimpProfile,
+           'PINKSHRIMP' = pinkshrimpProfile,
+           "ROYALREDSHRIMP" = royalredProfile,
+           "SPINYLOBSTER" = spinyProfile,
+           "QUEENSNAPPER" = queenProfile,
+           "MUTTONSNAPPER" = muttonProfile,
+           "BLACKFINSNAPPER"= blackfinProfile,
+           "CUBERASNAPPER" = cuberaProfile,
+           "GRAYSNAPPER" = graysnapperProfile,
+           "LANESNAPPER" = laneProfile,
+           "SILKSNAPPER" = silkProfile,
+           "YELLOWTAILSNAPPER" = yellowtailsnapperProfile,
+           "WENCHMAN" = wenchmanProfile,
+           "VERMILIONSNAPPER" = vermilionProfile,
+           "SPECKLEDHIND" = speckledProfile,
+           "GOLIATHGROUPER" = goliathProfile,
+           "REDGROUPER" = redgrouperProfile,
+           "YELLOWEDGEGROUPER" = yellowedgeProfile,
+           "WARSAWGROUPER" = warsawProfile,
+           "SNOWYGROUPER" = snowyProfile,
+           "BLACKGROUPER" = blackProfile,
+           "YELLOWMOUTHGROUPER" = yellowmouthProfile,
+           "GAG" = gagProfile,
+           "SCAMP" = scampProfile,
+           "YELLOWFINGROUPER" = yellowfinProfile,
+           "GOLDFACETILEFISH" = goldfaceProfile,
+           "BLUELINETILEFISH" = bluelineProfile,
+           "TILEFISH" = tilefishProfile,
+           "GRAYTRIGGERFISH" = graytriggerfishProfile,
+           "HOGFISH" = hogfishProfile
            # "redDrumSpawningAdult"=redDrumSpawningAdult)
     )
   })
   
   output$prof <- renderUI({
-    tags$iframe(src = profile(), seamless=NA,width="100%", height = 600,frameborder=0)
+    tags$iframe(src = profile(), seamless=NA,width="100%", style="height: calc(100vh - 80px)",frameborder=0)
   })
   ###########
   
@@ -167,7 +237,45 @@ server <- function(input, output) {
   agegrowth <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumAgeGrowth,
-           "REDSNAPPER" = redsnapperAgeGrowth#,
+           "REDSNAPPER" = redsnapperAgeGrowth,
+           "COBIA" = cobiaAgeGrowth,
+           "KINGMACKEREL" = kingAgeGrowth,
+           "SPANISHMACKEREL" = spanishAgeGrowth,
+           "ALMACOJACK" = almacoAgeGrowth,
+           "BANDEDRUDDERFISH" = rudderfishAgeGrowth,
+           "GREATERAMBERJACK" = greaterAJAgeGrowth,
+           "LESSERAMBERJACK" = lesserAJAgeGrowth,
+           "BROWNSHRIMP" = brownshrimpAgeGrowth,
+           "WHITESHRIMP" = whiteshrimpAgeGrowth,
+           'PINKSHRIMP' = pinkshrimpAgeGrowth,
+           "ROYALREDSHRIMP" = royalredAgeGrowth,
+           "SPINYLOBSTER" = spinyAgeGrowth,
+           "QUEENSNAPPER" = queenAgeGrowth,
+           "MUTTONSNAPPER" = muttonAgeGrowth,
+           "BLACKFINSNAPPER"= blackfinAgeGrowth,
+           "CUBERASNAPPER" = cuberaAgeGrowth,
+           "GRAYSNAPPER" = graysnapperAgeGrowth,
+           "LANESNAPPER" = laneAgeGrowth,
+           "SILKSNAPPER" = silkAgeGrowth,
+           "YELLOWTAILSNAPPER" = yellowtailsnapperAgeGrowth,
+           "WENCHMAN" = wenchmanAgeGrowth,
+           "VERMILIONSNAPPER" = vermilionAgeGrowth,
+           "SPECKLEDHIND" = speckledAgeGrowth,
+           "GOLIATHGROUPER" = goliathAgeGrowth,
+           "REDGROUPER" = redgrouperAgeGrowth,
+           "YELLOWEDGEGROUPER" = yellowedgeAgeGrowth,
+           "WARSAWGROUPER" = warsawAgeGrowth,
+           "SNOWYGROUPER" = snowyAgeGrowth,
+           "BLACKGROUPER" = blackAgeGrowth,
+           "YELLOWMOUTHGROUPER" = yellowmouthAgeGrowth,
+           "GAG" = gagAgeGrowth,
+           "SCAMP" = scampAgeGrowth,
+           "YELLOWFINGROUPER" = yellowfinAgeGrowth,
+           "GOLDFACETILEFISH" = goldfaceAgeGrowth,
+           "BLUELINETILEFISH" = bluelineAgeGrowth,
+           "TILEFISH" = tilefishAgeGrowth,
+           "GRAYTRIGGERFISH" = graytriggerfishAgeGrowth,
+           "HOGFISH" = hogfishAgeGrowth
            # add other species here)
     )
   })
