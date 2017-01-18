@@ -2,8 +2,8 @@ name: EFHApp
 account: gulfcouncilportal
 server: shinyapps.io
 appId: 148235
-bundleId: 674923
+bundleId: 683709
 url: https://gulfcouncilportal.shinyapps.io/EFHApp/
-when: 1484066042.47804
+when: 1484765166.01139
 asMultiple: FALSE
 asStatic: FALSE

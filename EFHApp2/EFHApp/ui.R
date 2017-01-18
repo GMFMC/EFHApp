@@ -90,10 +90,11 @@ ui <- dashboardPage(
                 column(width=7,
                        box(htmlOutput("prof"), style = "height: calc(100vh-80px)",
                            width=NULL)),
-                
+                tags$style("#leng{height: 43vh !important;}"),
+                tags$style("#land{height: 43vh !important;}"),
                 column(width=5,
-                       box(htmlOutput("leng"),height=300,width=NULL),
-                       box(htmlOutput("land"),height=300,width=NULL)
+                       box(htmlOutput("leng"),width=NULL),
+                       box(htmlOutput("land"),width=NULL)
                 )
               )
       ),

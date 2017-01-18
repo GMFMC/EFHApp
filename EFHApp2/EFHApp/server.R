@@ -237,7 +237,7 @@ server <- function(input, output) {
   })
   
   output$leng <- renderUI({
-    tags$iframe(src = agegrowth(), seamless=NA,  width="100%", height = 275,frameborder=0)
+    tags$iframe(src = agegrowth(), seamless=NA,  width="100%", style = "height: 43vh",frameborder=0)
   })
   ############################### end age growth ########################### 
   
@@ -251,7 +251,7 @@ server <- function(input, output) {
   })
   
   output$land <- renderUI({
-    tags$iframe(src = landings(), seamless=NA,  width="100%", height = 275,frameborder=0)
+    tags$iframe(src = landings(), seamless=NA,  width="100%", style = "height: 43vh",frameborder=0)
   })
   ############################### end landings ########################### 
   
