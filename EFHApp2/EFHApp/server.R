@@ -9,75 +9,50 @@
 
 server <- function(input, output) {  
   
-  ## Species Profiles ##
-  # output$prof <- renderUI({
-  #   tags$iframe(src = "reddrumSpeciesProfile.html", seamless=NA,width="100%", height = 600,frameborder=0)
-  # })
   
-  # output$leng <- renderUI({
-  #   tags$iframe(src = "RedDrum.html", seamless=NA,  width="100%", height = 275,frameborder=0)
-  # })
+  ################## BIBLIOGRAPHY ##################################
+  output$tbl1 <- DT::renderDataTable(x)
   
-  # output$land <- renderUI({
-  #   tags$iframe(src = "RDland.html", seamless=NA,  width="100%", height = 275,frameborder=0)
-  # })
+
+ 
+  ########################## LOAD MAPS ############################
   
-  ## Habitat Association Table ##
-  
-  # output$HAT <- renderUI({
-  #   tags$iframe(src = "reddrum_HAT.pdf", seamless=NA,  width="100%", height = 600,frameborder=0)
-  # })
-  
-  ## bibliography ##
-  output$tbl1 <- DT::renderDataTable(y)
-  
-  ## map ##
-  
-  #### None of this works except the leaflet loaded basemap ##
-  
-  # Select <- reactive({
-  #   switch(input$species,
-  #          "Red Drum"=R1)
-  #   })
-  Select2 <- reactive({
-    switch(input$lifeStage,
-           # "l"=l,
-           # 'pL'=pL,
-           # "eJ"=eJ,
-           # "lJ"=lJ,
-           # "ad"=ad,
-           # "spAd"=spAd,
-           "redDrumLateJuvenile" = redDrumLateJuvenile,
-           "redDrumAdult" = redDrumAdult,
-           "redDrumSpawningAdult"=redDrumSpawningAdult,
-           "redSnapperSpawningAdult"=redSnapperSpawningAdult,
-           "redSnapperLateJuvenile"=redSnapperLateJuvenile)
+  mapSpecies <- reactive({
+    switch(input$selectSpecies,
+           "REDDRUM"="REDDRUM",
+           "REDSNAPPER"="REDSNAPPER",
+           'BLACKGROUPER' = 'BLACKGROUPER',
+           'BLACKFINSNAPPER' = 'BLACKFINSNAPPER',
+           'BLUELINETILEFISH' = 'BLUELINETILEFISH',
+           'BROWNSHRIMP' = 'BROWNSHRIMP',
+           'COBIA' = 'COBIA',
+           'CUBERASNAPPER' = 'CUBERASNAPPER',
+           'GAG' = 'GAG',
+           'TILEFISH' = 'TILEFISH',
+           'GOLDFACETILEFISH' = 'GOLDFACETILEFISH',
+           'GOLIATHGROUPER' = 'GOLIATHGROUPER',
+           'GRAYTRIGGERFISH' = 'GRAYTRIGGERFISH'
+    )
   })
-  # colorpal <- reactive({
-  #   colorNumeric("BuPu",Select2()$Id)
-  # })
   
+  mapLifestage <- reactive({
+    switch (input$lifestage,
+            "spawningAdult"="spawningAdult",
+            "adult"="adult",
+            'earlyJuvenile' = "earlyJuvenile",
+            'lateJuvenile' = "lateJuvenile",
+            'larvae' = 'larvae',
+            'postLarvae' = 'postLarvae'
+    )
+  })
   
-  # colSelect <- reactive({
-  #   if (Select2()=l) {
-  #     fillColor = "#3B9AB2"
-  #   }
-  #   if (Select2()=pL) {
-  #     fillColor = "#78B7C5"
-  #   }
-  #   if (Select2()=eJ) {
-  #     fillColor = "#EBCC2A"
-  #   }
-  #   if (Select2()=lJ) {
-  #     fillColor = "#E1AF00"
-  #   }
-  #   if (Select2()=ad) {
-  #     fillColor = "#F21A00"
-  #   }
-  #   if (Select2()=spAd) {
-  #     fillColor = "#fc4e2a"
-  #   }
-  #     })
+  maplayer2 <- reactive({
+    tmp <- subset(a, species==mapSpecies() & lifestage==mapLifestage())
+    
+    tmp <- tmp[1,3]
+    
+    tmp
+  })
   
   output$map <- renderLeaflet({  
     
@@ -94,7 +69,7 @@ server <- function(input, output) {
       #addPolygons(fillColor="#E1AF00", data =ad)
       addTiles(
         #redSnapperLateJuvenile %>%   
-        Select2()) %>%
+        maplayer2()) %>%
       
       
       
@@ -109,27 +84,8 @@ server <- function(input, output) {
     
   })
   
-  #  observe({
-  # 
-  #   #factpal <- colorFactor(c("#3B9AB2", "#78B7C5",
-  #                             #"#EBCC2A", "#E1AF00" ,"#F21A00"), na.color="transparent",domain=Select2())
-  #   #
-  #   # factpal <- colorBin(c("#3B9AB2", "#78B7C5",
-  #   #                        "#EBCC2A", "#E1AF00" ,"#F21A00"),
-  #   #                      na.color="transparent",values(Select2()),bins=7)
-  #   # factpal <- colorNumeric(c('#ffffb2','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#b10026'),
-  #   #                         na.color="transparent",values(Select2()))
-  #   #pal <- colorpal()
-  # 
-  #   proxy <- leafletProxy("map", data =Select2())
-  #   #proxy %>% clearShapes()
-  # #   # proxy %>% addLegend(position = "bottomright",
-  # #   #                     pal = factpal, values = ColorData)
-  #   proxy %>% addPolygons(fillColor="#E1AF00", data = Select2())
-  # 
-  # })
-  
-  #####################Select HAT##########
+ 
+  ##################### SELECT HAT ####################################
   
   HAT <- reactive({
     switch(input$selectSpecies,
@@ -181,7 +137,7 @@ server <- function(input, output) {
     tags$iframe(src = HAT(), seamless=NA, style="height: calc(100vh - 80px)",  width="100%",frameborder=0)
   })
   
-  ############### select by species
+  ############### SELECT SPECIES PROFILE #######################################
   profile <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumProfile,
@@ -298,5 +254,8 @@ server <- function(input, output) {
     tags$iframe(src = landings(), seamless=NA,  width="100%", height = 275,frameborder=0)
   })
   ############################### end landings ########################### 
+  
+  
+
   
 } ## end server

@@ -10,7 +10,7 @@
 ui <- dashboardPage(
   dashboardHeader(title="Essential Fish Habitat Application"),
   dashboardSidebar(
-    sidebarMenu(
+    sidebarMenu(id = "tab",
       menuItem("Species Profile", tabName = "sp"),
       menuItem("Habitat Association Table", tabName = "HAT"),
       menuItem("Bibliography",tabName="bib"),
@@ -60,7 +60,18 @@ ui <- dashboardPage(
                       "Gray triggerfish" = "GRAYTRIGGERFISH",
                       "Hogfish" = "HOGFISH"
                     ),
-                      selected = "Red drum")),
+                      selected = "REDDRUM")),
+      conditionalPanel(
+        condition = "input.tab == 'map'",
+        div(
+        selectInput("lifestage", h3("Select lifestage:"),
+                    c("Spawning adult"="spawningAdult",
+                      "Adult"="adult",
+                      'Early juvenile' = "earlyJuvenile",
+                      'Late juvenile' = "lateJuvenile",
+                      'Larvae' = 'larvae',
+                      'Postlarvae' = 'postLarvae'),
+                    selected = 'adult'))),
       tags$hr(style="text-align: center;"),
     
     div(img(src="logo.png"), style="text-align: center;")
@@ -100,32 +111,32 @@ ui <- dashboardPage(
       
       ## Map ##
       tabItem(tabName='map',
-              leafletOutput('map',height=600),
-              absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
-                            draggable = TRUE, top = 80, left = "auto", right = 20, bottom = "auto",
-                            width = 250, height = "auto",
-                            #div(img(src="expl7292.png", height=517, width=200), style="text-align: center;"),
-                            div(h2("Habitat Explorer"),style="text-align: center;"),
-                            div(selectizeInput("species","Species",
-                                               c("Red Drum"),multiple=TRUE,selected="Red Drum"),style="text-align: center;"),
-                            
-                            ###Theoretically the selectInput would work like below, currently not operational ##
-                            div(
-                              selectInput("lifeStage", "Life Stage:",
-                                          c(
-                                            # c("Larvae" = "l",
-                                            #   "Postlarvae"='pL',
-                                            #   "Early Juveniles"="eJ",
-                                            #"Late Juveniles"="lJ",
-                                            #"Spawning Adults" = "spAd"),
-                                            "Late Juveniles" = "redDrumLateJuvenile",
-                                            "Adults" = "redDrumAdult",
-                                            "Spawning Adults" = "redDrumSpawningAdult",
-                                            "Spawning Adults2" = "redSnapperSpawningAdult"), ##JF
-                                          multiple=FALSE, selected = "redDrumSpawningAdult"))),
-              style="text-align: center;")
+              leafletOutput('map',height=600))#,
+              # absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+              #               draggable = TRUE, top = 80, left = "auto", right = 20, bottom = "auto",
+              #               width = 250, height = "auto",
+              #               #div(img(src="expl7292.png", height=517, width=200), style="text-align: center;"),
+              #               div(h2("Habitat Explorer"),style="text-align: center;"),
+              #               div(selectizeInput("species","Species",
+              #                                  c("Red Drum"),multiple=TRUE,selected="Red Drum"),style="text-align: center;"),
+              #               
+              #               ###Theoretically the selectInput would work like below, currently not operational ##
+              #               div(
+              #                 selectInput("lifeStage", "Life Stage:",
+              #                             c(
+              #                               # c("Larvae" = "l",
+              #                               #   "Postlarvae"='pL',
+              #                               #   "Early Juveniles"="eJ",
+              #                               #"Late Juveniles"="lJ",
+              #                               #"Spawning Adults" = "spAd"),
+              #                               "Late Juveniles" = "redDrumLateJuvenile",
+              #                               "Adults" = "redDrumAdult",
+              #                               "Spawning Adults" = "redDrumSpawningAdult",
+              #                               "Spawning Adults2" = "redSnapperSpawningAdult"), ##JF
+              #                             multiple=FALSE, selected = "redDrumSpawningAdult"))),
+              # style="text-align: center;")
+      
+    ))
       
       
-      
-      
-    )))
+    )

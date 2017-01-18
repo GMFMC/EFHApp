@@ -13,11 +13,11 @@ library(mapview)
 
 
 
-bib<-read.csv("red_drum.csv", na.strings=".")
-x<-bib[c(5,6,7,11)]
-y<-setcolorder(x,c("Author","Year","Title","Journal"))
-y$Journal<-as.character(y$Journal)
-y$Journal[is.na(y$Journal)] <- " "
+bib<-read.csv("referencesCombined.csv", na.strings=".")
+x<-bib[c(2,4,6,7,8)]
+# y<-setcolorder(x,c("Author","Year","Title","Journal"))
+x$Journal<-as.character(x$Journal)
+x$Journal[is.na(x$Journal)] <- " "
 
 ### this .RData file contains each of the red drum life stage shapefiles, it's causing 
 ## the folder to zip too slowly so I'm removing it. Not currently linked to anything##
@@ -26,11 +26,11 @@ y$Journal[is.na(y$Journal)] <- " "
 
 
 ############## JF: 10/12/2016
-redDrumSpawningAdult <-  "https://api.mapbox.com/styles/v1/jfroeschke/ciu703yi500g02inzohq8u5t6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
-redDrumLateJuvenile <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu741ln000g82jo146xsrn21/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
-redDrumAdult <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu7a0o0200002jpcl9oc0sqi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
-redSnapperSpawningAdult <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh70a6000s2imlw05lzaog/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
-redSnapperLateJuvenile <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh3ph6001m2io26uyalgi2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
+# redDrumSpawningAdult <-  "https://api.mapbox.com/styles/v1/jfroeschke/ciu703yi500g02inzohq8u5t6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
+# redDrumLateJuvenile <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu741ln000g82jo146xsrn21/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
+# redDrumAdult <- "https://api.mapbox.com/styles/v1/jfroeschke/ciu7a0o0200002jpcl9oc0sqi/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamZyb2VzY2hrZSIsImEiOiI5SHgwTWk4In0.J6IfXVALdDraXPBfPcyITg"
+# redSnapperSpawningAdult <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh70a6000s2imlw05lzaog/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
+# redSnapperLateJuvenile <- "https://api.mapbox.com/styles/v1/claireroberts/ciuhh3ph6001m2io26uyalgi2/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xhaXJlcm9iZXJ0cyIsImEiOiJjaWtqdTFyZ3UwOGw2dnRrbTlibDd2OW9yIn0.ccw4vPRr3LiUpAcqyThNig"
 ##red drum juvenile
 ## color code : E0E30C
 
@@ -45,7 +45,7 @@ addMouseCoordinates2 <- function (map)
 }
 
 source("r.R") ######### this file contains code to load species profiles, HATs, landings/von bert charts #########
-
+a <- read.csv('maplayers.csv')
 
 
 ##start here: need to add server code for this
