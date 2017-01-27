@@ -34,6 +34,11 @@ x$Journal[is.na(x$Journal)] <- " "
 ##red drum juvenile
 ## color code : E0E30C
 
+### MapBox Attribution##
+
+map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>Mapbox</a>"
+
+
 ##not used yet: software conflict?
 addMouseCoordinates2 <- function (map)
 {
@@ -52,12 +57,12 @@ a <- read.csv('maplayers.csv')
 
 ## load  others, delete test. For now test linked to red snapper
 ############ Species Profile ###################################
+## -86,28
 
-
-##  #ffff33  adults color code
+##  #ffff33  adults color code/ nonspawning Adult
 ##  #a65628  spawning adults
-##  #F781BF  eggs
+##  #F781BF  eggs/fertilized eggs
 ##  #E41A1C  larvae
-##  #4DAF4A  postlarvae
-##  #984EA3  early juveniles
-##  #FF7F00  late juveniles
+##  #4DAF4A  postlarvae/puerulusPostlarvae
+##  #984EA3  early juveniles/latepostlarvaejuveniles
+##  #FF7F00  late juveniles/subAdult/juvenile

@@ -31,7 +31,8 @@ server <- function(input, output) {
            'TILEFISH' = 'TILEFISH',
            'GOLDFACETILEFISH' = 'GOLDFACETILEFISH',
            'GOLIATHGROUPER' = 'GOLIATHGROUPER',
-           'GRAYTRIGGERFISH' = 'GRAYTRIGGERFISH'
+           'GRAYTRIGGERFISH' = 'GRAYTRIGGERFISH',
+           'HOGFISH' = 'HOGFISH'
     )
   })
   
@@ -69,7 +70,7 @@ server <- function(input, output) {
       #addPolygons(fillColor="#E1AF00", data =ad)
       addTiles(
         #redSnapperLateJuvenile %>%   
-        maplayer2()) %>%
+        maplayer2(),attribution = map_attr) %>%
      addControl( html=
                    '<table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #F781BF; stroke: #F781BF; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Eggs</td></tr></table>,
                   <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #E41A1C; stroke: #E41A1C; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Larvae</td></tr></table>,
