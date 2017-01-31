@@ -19,20 +19,45 @@ server <- function(input, output) {
   
   mapSpecies <- reactive({
     switch(input$selectSpecies,
-           "REDDRUM"="REDDRUM",
-           "REDSNAPPER"="REDSNAPPER",
-           'BLACKGROUPER' = 'BLACKGROUPER',
-           'BLACKFINSNAPPER' = 'BLACKFINSNAPPER',
-           'BLUELINETILEFISH' = 'BLUELINETILEFISH',
-           'BROWNSHRIMP' = 'BROWNSHRIMP',
-           'COBIA' = 'COBIA',
-           'CUBERASNAPPER' = 'CUBERASNAPPER',
-           'GAG' = 'GAG',
-           'TILEFISH' = 'TILEFISH',
-           'GOLDFACETILEFISH' = 'GOLDFACETILEFISH',
-           'GOLIATHGROUPER' = 'GOLIATHGROUPER',
-           'GRAYTRIGGERFISH' = 'GRAYTRIGGERFISH',
-           'HOGFISH' = 'HOGFISH'
+           "ALMACOJACK" = "ALMACOJACK",
+           "BANDEDRUDDERFISH" = "BANDEDRUDDERFISH",
+           "BLACKGROUPER" = "BLACKGROUPER",
+           "BLACKFINSNAPPER" = "BLACKFINSNAPPER",
+           "BLUELINETILEFISH" = "BLUELINETILEFISH",
+           "BROWNSHRIMP" = "BROWNSHRIMP",
+           "COBIA" = "COBIA",
+           "CUBERASNAPPER" = "CUBERASNAPPER",
+           "GAG" = "GAG",
+           "GOLDFACETILEFISH" = "GOLDFACETILEFISH",
+           "GOLIATHGROUPER" = "GOLIATHGROUPER",
+           "GRAYSNAPPER" = "GRAYSNAPPER",
+           "GRAYTRIGGERFISH" = "GRAYTRIGGERFISH",
+           "GREATERAMBERJACK" = "GREATERAMBERJACK",
+           "HOGFISH" = "HOGFISH",
+           "KINGMACKEREL" = "KINGMACKEREL",
+           "LANESNAPPER" = "LANESNAPPER",
+           "LESSERAMBERJACK" = "LESSERAMBERJACK",
+           "MUTTONSNAPPER" = "MUTTONSNAPPER",
+           "PINKSHRIMP" = "PINKSHRIMP",
+           "QUEENSNAPPER" = "QUEENSNAPPER",
+           "REDDRUM" = "REDDRUM",
+           "REDGROUPER" = 'REDGROUPER',
+           "REDSNAPPER" = "REDSNAPPER",
+           "ROYALREDSHRIMP" = "ROYALREDSHRIMP",
+           "SCAMP" = "SCAMP",
+           "SILKSNAPPER" = "SILKSNAPPER",
+           "SNOWYGROUPER" = "SNOWYGROUPER",
+           "SPANISHMACKEREL" = "SPANISHMACKEREL",
+           "SPECKLEDHIND" = "SPECKLEDHIND",
+           "SPINYLOBSTER" = 'SPINYLOBSTER',
+           "VERMILIONSNAPPER" = 'VERMILIONSNAPPER',
+           "WARSAWGROUPER" = 'WARSAWGROUPER',
+           "WENCHMAN" = 'WENCHMAN',
+           "WHITESHRIMP" = "WHITESHRIMP",
+           "YELLOWEDGEGROUPER" = 'YELLOWEDGEGROUPER', 
+           "YELLOWFINGROUPER" = 'YELLOWFINGROUPER',
+           "YELLOWMOUTHGROUPER" = "YELLOWMOUTHGROUPER",
+           "YELLOWTAILSNAPPER" = "YELLOWTAILSNAPPER"
     )
   })
   
@@ -43,7 +68,8 @@ server <- function(input, output) {
             'earlyJuvenile' = "earlyJuvenile",
             'lateJuvenile' = "lateJuvenile",
             'larvae' = 'larvae',
-            'postLarvae' = 'postLarvae'
+            'postLarvae' = 'postLarvae',
+            "eggs" = "eggs"
     )
   })
   
