@@ -9,7 +9,9 @@ library(car)
 library(shinyBS)
 library(leaflet)
 library(RColorBrewer)
-library(mapview)
+library(DT)
+#library(mapview)
+library(rgdal)
 
 
 
@@ -18,6 +20,28 @@ x<-bib[c(2,4,6,7,8)]
 # y<-setcolorder(x,c("Author","Year","Title","Journal"))
 x$Journal<-as.character(x$Journal)
 x$Journal[is.na(x$Journal)] <- " "
+
+#### Welcome Map .shp files ##
+
+# listRdata<-dir(pattern="*.RData")
+# for(i in 1:72){
+#   load(listRdata[i])
+# }
+
+ER1 <- readOGR(dsn="ER1.shp",layer="ER1")
+ER2 <- readOGR(dsn="ER2.shp",layer="ER2")
+ER3 <- readOGR(dsn="ER3.shp",layer="ER3")
+ER4 <- readOGR(dsn="ER4.shp",layer="ER4")
+ER5 <- readOGR(dsn="ER5.shp",layer="ER5")
+#ERgulf <- readOGR(dsn="gulfwide.shp",layer="gulfwide")
+
+
+
+
+est <- readOGR(dsn="estuarine.shp",layer="estuarine")
+near <- readOGR(dsn="nearshore.shp",layer="nearshore")
+off <- readOGR(dsn="offshore.shp",layer="offshore")
+
 
 ### this .RData file contains each of the red drum life stage shapefiles, it's causing 
 ## the folder to zip too slowly so I'm removing it. Not currently linked to anything##

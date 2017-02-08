@@ -7,15 +7,16 @@ border-spacing: 3px;
   box-shadow:0px 0px 10px #808080;
 text-align:center;
 border-radius:10px;
+background-color: #ffffff;
 }
 
 .table1 th, .table1 td {
-  color: #999;
+  color: #333;
   border: 1px solid #eee;
   padding: 12px 25px;
 }
 .table1 th {
-  background: #228B22;
+  background: #2bafa4;
   color: #fff;
   text-transform: uppercase;
   font-size: 12px;
@@ -28,3 +29,4 @@ transition: all 1s;
 border-radius: 5px;
 box-shadow: 3px 3px #808080;
 }
+

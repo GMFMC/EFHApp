@@ -11,8 +11,12 @@ server <- function(input, output) {
   
   
   ################## BIBLIOGRAPHY ##################################
-  output$tbl1 <- DT::renderDataTable(x)
-  
+  output$tbl1 <- DT::renderDataTable({
+    datatable(x,filter="top",options=list(pageLength=20),
+              rownames=FALSE,colnames=c("Footnote","Common name",
+                                        "Author", "Title", "Journal")) 
+    
+  })
 
  
   ########################## LOAD MAPS ############################
@@ -61,25 +65,44 @@ server <- function(input, output) {
     )
   })
   
-  mapLifestage <- reactive({
-    switch (input$lifestage,
+  mapfishLifestage <- reactive({
+    switch (input$fishLifestage,
             "spawningAdult"="spawningAdult",
             "adult"="adult",
-            'earlyJuvenile' = "earlyJuvenile",
-            'lateJuvenile' = "lateJuvenile",
+            "earlyJuvenile" = "earlyJuvenile",
+            "lateJuvenile" = "lateJuvenile",
             'larvae' = 'larvae',
             'postLarvae' = 'postLarvae',
             "eggs" = "eggs"
     )
   })
   
+  mapshrimpLifestage <- reactive({
+    switch (input$shrimpLifestage,
+            "fertilizedEgg" = "fertilizedEgg",
+            "latePostlarvaeJuvenile" = "latePostlarvaeJuvenile",
+            "adult" = "adult",
+            "spawningAdult"="spawningAdult",
+            "subAdult" = "subAdult",
+            "larvae" = "larvae"
+            
+    )
+  })
+  
   maplayer2 <- reactive({
-    tmp <- subset(a, species==mapSpecies() & lifestage==mapLifestage())
-    
+     
+    if(mapSpecies() == "BROWNSHRIMP"){
+      tmp <- subset(a, species==mapSpecies() & lifestage==mapshrimpLifestage())
+    } else {
+      tmp <- subset(a,species==mapSpecies() & lifestage==mapfishLifestage())
+    }
+
     tmp <- tmp[1,3]
-    
+
     tmp
   })
+  
+  output$speciesTable <- renderTable(maplayer2())
   
   output$map <- renderLeaflet({  
     
@@ -91,21 +114,29 @@ server <- function(input, output) {
       addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/Mapserver/tile/{z}/{y}/{x}',
                options = providerTileOptions(noWrap = TRUE)) %>%
       
-      setView(-85, 27.75, zoom = 6) %>% 
+      setView(-89.2, 27.64, zoom = 6) %>% 
       addScaleBar(position="bottomright") %>% 
       #addPolygons(fillColor="#E1AF00", data =ad)
       addTiles(
         #redSnapperLateJuvenile %>%   
         maplayer2(),attribution = map_attr) %>%
+      addControl(html='<table style="width:100%"><tr>
+                      <td><b>*Note</b>: If no map appears for a selected species and 
+                      lifestage, then it lacks some information necessary to inform a 
+                      habitat map.</td></tr></table>', position=c("bottomleft"),className="info legend note") %>%
+  
+ 
      addControl( html=
-                   '<table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #F781BF; stroke: #F781BF; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Eggs</td></tr></table>,
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #E41A1C; stroke: #E41A1C; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Larvae</td></tr></table>,
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #4DAF4A; stroke: #4DAF4A; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Postlarvae</td></tr></table>,
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #984EA3; stroke: #984EA3; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Early juvenile</td></tr></table>,  
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #FF7F00; stroke: #FF7F00; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Late juvenile</td></tr></table>,
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #ffff33; stroke: #ffff33; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Adults</td></tr></table>,
-                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #a65628; stroke: #a65628; fill-opacity: 0.5; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Spawning adults</td></tr></table>',
-                  position=c("bottomleft"))
+                   '<table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #F781BF; stroke: #F781BF; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Eggs</td></tr></table>
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #E41A1C; stroke: #E41A1C; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Larvae</td></tr></table>
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #4DAF4A; stroke: #4DAF4A; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Postlarvae</td></tr></table>
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #984EA3; stroke: #984EA3; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Early juvenile</td></tr></table>  
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #FF7F00; stroke: #FF7F00; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Late juvenile</td></tr></table>
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #ffff33; stroke: #ffff33; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Adults</td></tr></table>
+                  <table><tr><td class="shape"><svg style="width:24px; height:22px;" xmlns="http://www.w3.org/2000/svg" version="1.1"><polygon class="plgn" style="fill: #a65628; stroke: #a65628; fill-opacity: 1; stroke-opacity: 1.0; stroke-width: 1;" points="1.5, 0.5 22.5, 11 22.5, 21.5 1.5, 21.5" /></svg></td><td class="value">Spawning adults</td></tr></table>',
+                  className="info legend shape",
+                  position=c("bottomleft"))  
+    
     
     # addLayersControl(
     #      overlayGroups = c(GROUP))
@@ -273,7 +304,45 @@ server <- function(input, output) {
   landings <-reactive({
     switch(input$selectSpecies,
            "REDDRUM" = reddrumLandings,
-           "REDSNAPPER" = redsnapperLandings#,
+           "REDSNAPPER" = redsnapperLandings,
+           "COBIA" = cobiaLandings,
+           "KINGMACKEREL" = kingLandings,
+           "SPANISHMACKEREL" = spanishLandings,
+           "ALMACOJACK" = almacoLandings,
+           "BANDEDRUDDERFISH" = rudderfishLandings,
+           "GREATERAMBERJACK" = greaterAJLandings,
+           "LESSERAMBERJACK" = lesserAJLandings,
+           #"BROWNSHRIMP" = brownshrimpLandings,
+           #"WHITESHRIMP" = whiteshrimpLandings,
+           #'PINKSHRIMP' = pinkshrimpLandings,
+           #"ROYALREDSHRIMP" = royalredLandings,
+           "SPINYLOBSTER" = spinyLandings,
+           "QUEENSNAPPER" = queenLandings,
+           "MUTTONSNAPPER" = muttonLandings,
+           "BLACKFINSNAPPER"= blackfinLandings,
+           "CUBERASNAPPER" = cuberaLandings,
+           "GRAYSNAPPER" = graysnapperLandings,
+           "LANESNAPPER" = laneLandings,
+           "SILKSNAPPER" = silkLandings,
+           "YELLOWTAILSNAPPER" = yellowtailsnapperLandings,
+           "WENCHMAN" = wenchmanLandings,
+           "VERMILIONSNAPPER" = vermilionLandings,
+           "SPECKLEDHIND" = speckledLandings,
+           "GOLIATHGROUPER" = goliathLandings,
+           "REDGROUPER" = redgrouperLandings,
+           "YELLOWEDGEGROUPER" = yellowedgeLandings,
+           "WARSAWGROUPER" = warsawLandings,
+           "SNOWYGROUPER" = snowyLandings,
+           "BLACKGROUPER" = blackLandings,
+           "YELLOWMOUTHGROUPER" = yellowmouthLandings,
+           "GAG" = gagLandings,
+           "SCAMP" = scampLandings,
+           "YELLOWFINGROUPER" = yellowfinLandings,
+           "GOLDFACETILEFISH" = goldfaceLandings,
+           "BLUELINETILEFISH" = bluelineLandings,
+           "TILEFISH" = tilefishLandings,
+           "GRAYTRIGGERFISH" = graytriggerfishLandings,
+           "HOGFISH" = hogfishLandings
            # add other species here)
     )
   })
@@ -282,7 +351,59 @@ server <- function(input, output) {
     tags$iframe(src = landings(), seamless=NA,  width="100%", style = "height: 43vh",frameborder=0)
   })
   ############################### end landings ########################### 
+  ################## Welcome Page ##########################
   
+  
+output$map2 <- renderLeaflet({
+
+  map2 <- leaflet() %>%
+
+  addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+           options = providerTileOptions(noWrap = TRUE)) %>%
+  addTiles('http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/Mapserver/tile/{z}/{y}/{x}',
+           options = providerTileOptions(noWrap = TRUE)) %>%
+
+  setView(-88.1, 27.75, zoom = 6) %>%
+  addScaleBar(position="bottomright") %>%
+  addPolygons(data=ER1,group="Eco-regions",color="#FF0000",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=ER2,group="Eco-regions",color="#00A08A",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=ER3,group="Eco-regions",color="#F2AD00",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=ER4,group="Eco-regions",color="#F98400",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=ER5,group="Eco-regions",color="#5BBCD6",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=est,group="Habitat zones",color="#35274A",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=near,group="Habitat zones",color="#0B775E",fillOpacity = 0.8,stroke=FALSE) %>%
+  addPolygons(data=off,group="Habitat zones",color="#EABE94",fillOpacity = 0.8,stroke=FALSE) %>%
+  addLayersControl(baseGroups = c("Eco-regions","Habitat zones"),
+                     options=layersControlOptions(collapsed=FALSE),position="bottomright") %>%
+  hideGroup("Habitat zones")
+  # addLegend(colors=c("#FF0000","#00A08A","#F2AD00","#F98400","#5BBCD6"),
+  #           labels=c("ER1","ER2","ER3","ER4","ER5")) %>%
+  # addLegend(colors=c("#35274A","#0B775E","#EABE94"),
+  #           labels=c("Estuarine","Nearshore","Offshore"))
+
+})
+
+observeEvent(input$map2_groups,{
+  map2 <- leafletProxy("map2")
+  map2 %>% clearControls()
+  if (input$map2_groups == 'Eco-regions') {
+    map2 %>% addLegend(colors=c("#FF0000","#00A08A","#F2AD00","#F98400","#5BBCD6"),
+              labels=c("Eco-region 1","Eco-region 2","Eco-region 3","Eco-region 4","Eco-region 5"),
+              opacity = 1)
+  }
+  if (input$map2_groups == "Habitat zones") {
+    map2 %>% addLegend(colors=c("#35274A","#0B775E","#EABE94"),
+      labels=c("Estuarine","Nearshore","Offshore"),opacity=1)
+  }
+})
+    # 
+  ########## doesn't work #############
+  #if (input$map2_groups == "Depth zones" & input$map2_groups =='Eco-regions') {
+    #   map2 %>% addLegend(colors=c("#35274A","#0B775E","#EABE94","#FF0000","#00A08A","#F2AD00","#F98400","#5BBCD6"),
+    #                      labels=c("Estuarine","Nearshore","Offshore","ER1","ER2","ER3","ER4","ER5"))
+    # }
+ 
+ 
   
 
   

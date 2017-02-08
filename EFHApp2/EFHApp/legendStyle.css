@@ -1,0 +1,9 @@
+.info.legend.shape.leaflet-control{
+background-color: white;
+}
+
+.info.legend.note.leaflet-control{
+    background: transparent;
+    box-shadow: none;
+    color: white;
+}

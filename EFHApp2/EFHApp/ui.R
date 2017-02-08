@@ -15,7 +15,7 @@ ui <- dashboardPage(
       menuItem("Species Profile", tabName = "sp"),
       menuItem("Habitat Association Table", tabName = "HAT"),
       menuItem("Bibliography",tabName="bib"),
-      menuItem("Habitat Maps",tabName="map"),
+      menuItem("EFH Maps",tabName="map"),
       tags$hr(style="border-color: white;"),
       tags$head(includeCSS("efhStyle.css")),
       #div(h3("Select species"),style="text-align: center;"),
@@ -64,7 +64,7 @@ ui <- dashboardPage(
                     ),
                       selected = "REDDRUM")),
       conditionalPanel(
-        condition = "input.tab == 'map'",
+        condition = "input.tab == 'map' && input.selectSpecies != 'BROWNSHRIMP'",
         div(
         selectInput("lifestage", h3("Select lifestage:"),
                     c("Eggs"= "eggs",
@@ -76,13 +76,31 @@ ui <- dashboardPage(
                       "Spawning adults" = "spawningAdult" 
                     ),
                     selected = 'adult'))),
+      conditionalPanel(
+        condition = "input.tab == 'map' && input.selectSpecies == 'BROWNSHRIMP'" ,
+        div(
+          selectInput("lifestage", h3("Select lifestage:"),
+                      c("Fertilized eggs"= "fertilizedEgg",
+                        "Larvae, pre-settlement postlarvae" = "larvae",
+                        "Late postlarvae, juveniles" = "latePostlarvaeJuvenile",
+                        
+                        "Sub-adults" = "subAdult",
+                        "Non-spawning adults" = "adult",
+                        "Spawning adults" = "spawningAdult"
+                      ),
+                      selected = 'adult'))),
       tags$hr(style="text-align: center;"),
     
-    div(img(src="logo.png"), style="text-align: center;")
+    div(img(src="logo.png"), style="text-align: center;"),
+    br(),
+    br(),
+    div(tags$a(href="mailto: portal@gulfcouncil.org", "Contact us",style="color:#1890a8; font-size: 150%; 
+               font-weight: bold; "), align="center")
     
     
   )),
   dashboardBody(
+    
      tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
      #tags$style(type = "text/css", "#sp {height: calc(100vh - 80px) !important;}"),
     tabItems(
@@ -90,38 +108,103 @@ ui <- dashboardPage(
       ## Welcome Tab ##
       tabItem(tabName = "welcome",
         fluidRow(
-          column(7, align = "center",
-                 h2 ("Welcome To The Gulf of Mexico Fishery Management Council
-                     Essential Fish Habitat Application"),
+          column(10, offset = 1,
+                 align = "center", includeCSS("efhStyle.css"),
+                 h1 (align = "center",strong("Welcome To The Gulf of Mexico Fishery Management Council", br(), "Essential Fish Habitat Portal")),
                  
-                 h3("This site was compiled from the 2016 5-Year EFH Review. On the left, 
-                    you'll see tabs for the species profiles, 
-                    habitat association tables, habitat maps, 
-                    and bibliography generated during the review. Selecting from the species dropdown menu
-                    will populate all other tabs with the information about the species you selected. If you 
-                    explore the habitat maps, an addition dropdowm menu will appear, allowing you to choose
-                    both a species and life stage."),
-                 h3("These habitat maps were developed to shed light on habitat use by species and life stage, 
-                    but are not the officially accepted designations. These can be found in 2005 Generic 
-                    Amendment 3 (GMFMC 2005) or", a("here.", 
-                    href="http://portal.gulfcouncil.org/efh/"), "Species profile, habitat association table
-                    and map development is further described below.")
-                                                                                                
-            
-          ),
-          column(5,
-                 includeHTML("welcomeTable.html"),
-                     includeCSS("welcomeTableCSS.css")
-          )
-        ),
+                     
+                 
+                 h3(align = 'justify',"This site summarizes the findings of the Council's 2011 - 2016 review of EFH in the Gulf of Mexico. 
+                    This review included the development of species profiles, updated habitat association tables, habitat maps, and the 
+                    bibliography used to produce the review.  This application is interactive and can be queried by species using the 
+                    selection tabs on the left.  If you explore the habitat maps, an addition dropdown menu will appear, allowing you to choose 
+                    both a species and lifestage. 
+                    
+                 
+                 
+                    These habitat maps were developed to describe habitat use by species and life stage, 
+                    but are not the officially accepted designations and should be used for descriptive purposes only.
+                    The official designations can be found in", a("2005 Generic 
+                    Amendment 3 (GMFMC 2005)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/FINAL3_EFH_Amendment.pdf"), "or", a("here.", 
+                    href="http://portal.gulfcouncil.org/efh/")),
+                 h3(align = "justify",
+                  "For each species managed by the Gulf of Mexico Fishery Management Council, a profile, habitat association table
+                    and map of EFH (as identified by this process) have been created. The EFH maps were defined based on five eco-regions identified 
+                    in previous EFH documents (Figure 1, Table 1). Within each eco-region, three habitat zones (estuarine, nearshore, offshore; Figure 1.) are recognized,
+                    and specific habitat types (Table 2.) were mapped within each eco-region and habitat zone. These were used to develop EFH for each species and
+                    lifestage, and are available here for all species managed by the Gulf of Mexico Fishery Management Council. Each of these elements highlight 
+                    information regarding species distribution and habitat use, and include new information gathered during this review, along with information from
+                    the", a("EFH Final Environmental Impact Statement (GMFMC 2004)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/Final%20EFH%20EIS.pdf"),",",
+                  a("EFH Generic Amendment 3 (GMFMC 2005)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/FINAL3_EFH_Amendment.pdf"),
+                   ", and the", a("2010 EFH 5-Year Review (GMFMC 2010)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/EFH%205-Year%20Review%20Final%2010-10.pdf"),
+                   ".")
+                    
+                 
+                 
+                 #tags$hr(style="border-color: black;")                                                                            
+          
+          )),
+        #   column(5,
+        #          includeHTML("welcomeTable.html"),
+        #              includeCSS("welcomeTableCSS.css")
+        #   )
+        # ),
+        # fluidRow(
+        #   column(10, offset = 1,align = "left",
+        #          h3("For each species managed by the Gulf of Mexico Fishery Management Council, a profile, habitat association table
+        #             and map of EFH (as identified by this process) have been created. The EFH maps were defined based on five eco-regions identified 
+        #             in previous EFH documents (Figure 1, Table 1). Within each eco-region, three habitat zones (estuarine, nearshore, offshore; Figure 1.) are recognized,
+        #             and specific habitat types (Table 2.) were mapped within each eco-region and habitat zone. These were used to develop EFH for each species and
+        #             lifestage, and are available here for all species managed by the Gulf of Mexico Fishery Management Council. Each of these elements highlight 
+        #             information regarding species distribution and habitat use, and include new information gathered during this review, along with information from
+        #             the EFH Final Environmental Impact Statement (GMFMC 2004), EFH Generic Amendment 3 (GMFMC 2005), and the 2010 EFH 5-Year Review (GMFMC 2010).
+        #             "))
+        #     
+        #             
+        # 
+        # ),
       
         fluidRow(
-          #column(7),
-          column(5, offset = 7,
-                 includeHTML("welcomeHabType.html")
-                     
-            
-          )
+          
+          
+          column(7, offset = 2,align= "center",
+                 leafletOutput('map2'),
+                  
+                  h4(strong("Figure 1."), "Spatial depiction of eco-regions and
+                     habitat zones, textually described below. Use the button
+                     in the map to toggle between the two layers."))
+          
+
+        ),
+        # fluidRow(
+        #   column(10, offset = 1, align = "center",
+        #          h3("To create these maps, ERs (Table 1; Figure 1) and habitat zones (Figure 1 and described below)
+        #             were used to clip
+        #             the GIS layers gathered for each habitat types (Table 2)"),
+        #          h3("Habitat zone is comprised of three categories: 
+        #             estuarine (inside barrier islands and estuaries), nearshore (60 feet (18m) or 
+        #             less in depth) and offshore (greater than 60 feet (18m) in depth; Figure 1).  
+        #             Habitat type was subdivided into 12 categories distributed amongst the three zones.  
+        #             These 12 types were based on a combination of substrate and biogenic structure descriptions 
+        #             that was considered to provide the best overall categorization of fish habitats 
+        #             in the Gulf of Mexico (Table 1).")
+        #          )
+        # ),
+        fluidRow(
+          br(),
+          br(),
+          column(5, offset = 1,align = "center",
+                 h4(align = "left",strong("Table 1."), "Gulf of Mexico eco-regions and corresponding NOAA Statistical Grids."),
+                 includeHTML("welcomeTable.html"),
+                               includeCSS("welcomeTableCSS.css"),
+                 h4(align = "left",strong("*Note"), ": The specific depth ranges and habitat types used by each species and life stage 
+                    can be found in the habitat association table for that species.  In cases where a 
+                    life stage is water column associated (WCA) only that habitat type is depicted as it 
+                    overlays any other habitat types.")),
+          column(5, align = "center",
+                 h4(strong("Table 2."), "Twelve habitat types used throughout the habitat association tables and 
+                    terms related to those habitat types."),
+                 includeHTML("welcomeHabType.html"))
         )
       ),
       
@@ -154,7 +237,9 @@ ui <- dashboardPage(
       
       ## Map ##
       tabItem(tabName='map',
-              leafletOutput('map',height=600))#,
+              includeCSS("legendStyle.css"),
+              leafletOutput('map',height=600)),
+              tableOutput('speciesTable')
               # absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
               #               draggable = TRUE, top = 80, left = "auto", right = 20, bottom = "auto",
               #               width = 250, height = "auto",
