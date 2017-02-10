@@ -18,7 +18,9 @@ ui <- dashboardPage(
       menuItem("EFH Maps",tabName="map"),
       tags$hr(style="border-color: white;"),
       tags$head(includeCSS("efhStyle.css")),
-      #div(h3("Select species"),style="text-align: center;"),
+      
+      ### Selector for species ###
+      
       div(
         selectInput("selectSpecies", h3("Select species:"),
                     c("Almaco jack" = "ALMACOJACK",
@@ -63,10 +65,11 @@ ui <- dashboardPage(
                       
                     ),
                       selected = "REDDRUM")),
-      conditionalPanel(
-        condition = "input.tab == 'map' && input.selectSpecies != 'BROWNSHRIMP'",
+      
+       ### conditional Panel displays when species is fish and map tab is selected ###
+      conditionalPanel(condition="input.tab == 'map' && output.groupsID == '1'",
         div(
-        selectInput("lifestage", h3("Select lifestage:"),
+        selectInput("fishLifestage", h3("Select lifestage:"),
                     c("Eggs"= "eggs",
                       "Larvae" = "larvae",
                       "Postlarvae" = "postLarvae",
@@ -75,20 +78,37 @@ ui <- dashboardPage(
                       "Adults" = "adult",
                       "Spawning adults" = "spawningAdult" 
                     ),
-                    selected = 'adult'))),
-      conditionalPanel(
-        condition = "input.tab == 'map' && input.selectSpecies == 'BROWNSHRIMP'" ,
+                    selected = 'adult'))
+        ),
+      
+      ### conditional Panel displays when shrimp and map tab is selected ###
+      conditionalPanel(condition="input.tab == 'map' && output.groupsID == '2'",
         div(
-          selectInput("lifestage", h3("Select lifestage:"),
+          selectInput("shrimpLifestage", h3("Select lifestage:"),
                       c("Fertilized eggs"= "fertilizedEgg",
                         "Larvae, pre-settlement postlarvae" = "larvae",
                         "Late postlarvae, juveniles" = "latePostlarvaeJuvenile",
                         
                         "Sub-adults" = "subAdult",
-                        "Non-spawning adults" = "adult",
+                        "Non-spawning adults" = "nonSpawningAdult",
                         "Spawning adults" = "spawningAdult"
                       ),
-                      selected = 'adult'))),
+                      selected = 'adult'))
+      ),
+      
+      ### conditional Panel displays when spiny lobster and map tab is selected ###
+      conditionalPanel(condition="input.tab == 'map' && output.groupsID == '3'",
+                       div(
+                         selectInput("spinyLifestage", h3("Select lifestage:"),
+                                     c("Phyllosome larvae" = "larvae",
+                                       "Puerulus postlarvae" = "puerulusPostlarvae",
+                                       "Juveniles" = "juvenile",
+                                       "Adults" = "adult"
+                                    
+                                     ),
+                                     selected = 'adult'))
+      ),
+      
       tags$hr(style="text-align: center;"),
     
     div(img(src="logo.png"), style="text-align: center;"),
@@ -112,21 +132,18 @@ ui <- dashboardPage(
                  align = "center", includeCSS("efhStyle.css"),
                  h1 (align = "center",strong("Welcome To The Gulf of Mexico Fishery Management Council", br(), "Essential Fish Habitat Portal")),
                  
-                     
-                 
                  h3(align = 'justify',"This site summarizes the findings of the Council's 2011 - 2016 review of EFH in the Gulf of Mexico. 
                     This review included the development of species profiles, updated habitat association tables, habitat maps, and the 
                     bibliography used to produce the review.  This application is interactive and can be queried by species using the 
                     selection tabs on the left.  If you explore the habitat maps, an addition dropdown menu will appear, allowing you to choose 
                     both a species and lifestage. 
                     
-                 
-                 
                     These habitat maps were developed to describe habitat use by species and life stage, 
                     but are not the officially accepted designations and should be used for descriptive purposes only.
                     The official designations can be found in", a("2005 Generic 
                     Amendment 3 (GMFMC 2005)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/FINAL3_EFH_Amendment.pdf"), "or", a("here.", 
                     href="http://portal.gulfcouncil.org/efh/")),
+                 
                  h3(align = "justify",
                   "For each species managed by the Gulf of Mexico Fishery Management Council, a profile, habitat association table
                     and map of EFH (as identified by this process) have been created. The EFH maps were defined based on five eco-regions identified 
@@ -138,31 +155,7 @@ ui <- dashboardPage(
                   a("EFH Generic Amendment 3 (GMFMC 2005)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/FINAL3_EFH_Amendment.pdf"),
                    ", and the", a("2010 EFH 5-Year Review (GMFMC 2010)",href="http://gulfcouncil.org/Beta/GMFMCWeb/downloads/EFH%205-Year%20Review%20Final%2010-10.pdf"),
                    ".")
-                    
-                 
-                 
-                 #tags$hr(style="border-color: black;")                                                                            
-          
-          )),
-        #   column(5,
-        #          includeHTML("welcomeTable.html"),
-        #              includeCSS("welcomeTableCSS.css")
-        #   )
-        # ),
-        # fluidRow(
-        #   column(10, offset = 1,align = "left",
-        #          h3("For each species managed by the Gulf of Mexico Fishery Management Council, a profile, habitat association table
-        #             and map of EFH (as identified by this process) have been created. The EFH maps were defined based on five eco-regions identified 
-        #             in previous EFH documents (Figure 1, Table 1). Within each eco-region, three habitat zones (estuarine, nearshore, offshore; Figure 1.) are recognized,
-        #             and specific habitat types (Table 2.) were mapped within each eco-region and habitat zone. These were used to develop EFH for each species and
-        #             lifestage, and are available here for all species managed by the Gulf of Mexico Fishery Management Council. Each of these elements highlight 
-        #             information regarding species distribution and habitat use, and include new information gathered during this review, along with information from
-        #             the EFH Final Environmental Impact Statement (GMFMC 2004), EFH Generic Amendment 3 (GMFMC 2005), and the 2010 EFH 5-Year Review (GMFMC 2010).
-        #             "))
-        #     
-        #             
-        # 
-        # ),
+            )),
       
         fluidRow(
           
@@ -176,20 +169,7 @@ ui <- dashboardPage(
           
 
         ),
-        # fluidRow(
-        #   column(10, offset = 1, align = "center",
-        #          h3("To create these maps, ERs (Table 1; Figure 1) and habitat zones (Figure 1 and described below)
-        #             were used to clip
-        #             the GIS layers gathered for each habitat types (Table 2)"),
-        #          h3("Habitat zone is comprised of three categories: 
-        #             estuarine (inside barrier islands and estuaries), nearshore (60 feet (18m) or 
-        #             less in depth) and offshore (greater than 60 feet (18m) in depth; Figure 1).  
-        #             Habitat type was subdivided into 12 categories distributed amongst the three zones.  
-        #             These 12 types were based on a combination of substrate and biogenic structure descriptions 
-        #             that was considered to provide the best overall categorization of fish habitats 
-        #             in the Gulf of Mexico (Table 1).")
-        #          )
-        # ),
+        
         fluidRow(
           br(),
           br(),
@@ -208,7 +188,7 @@ ui <- dashboardPage(
         )
       ),
       
-      ## species profiles ##
+  ########################## species profiles ##########################################
       tabItem(tabName="sp",
               fluidRow(
                 
@@ -224,46 +204,24 @@ ui <- dashboardPage(
               )
       ),
       
-      ## HAT ##
+################################### HAT #########################################################
       tabItem(tabName="HAT",
               htmlOutput("HAT",height=600)
             
               
                #box(htmlOutput("HAT"),height=625)),
       ),
-      ## bibliography ##
+
+############################ bibliography #########################################################
       tabItem(tabName="bib",
               DT::dataTableOutput('tbl1')),
       
-      ## Map ##
+################################# EFH Map ############################################################
       tabItem(tabName='map',
               includeCSS("legendStyle.css"),
               leafletOutput('map',height=600)),
               tableOutput('speciesTable')
-              # absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
-              #               draggable = TRUE, top = 80, left = "auto", right = 20, bottom = "auto",
-              #               width = 250, height = "auto",
-              #               #div(img(src="expl7292.png", height=517, width=200), style="text-align: center;"),
-              #               div(h2("Habitat Explorer"),style="text-align: center;"),
-              #               div(selectizeInput("species","Species",
-              #                                  c("Red Drum"),multiple=TRUE,selected="Red Drum"),style="text-align: center;"),
-              #               
-              #               ###Theoretically the selectInput would work like below, currently not operational ##
-              #               div(
-              #                 selectInput("lifeStage", "Life Stage:",
-              #                             c(
-              #                               # c("Larvae" = "l",
-              #                               #   "Postlarvae"='pL',
-              #                               #   "Early Juveniles"="eJ",
-              #                               #"Late Juveniles"="lJ",
-              #                               #"Spawning Adults" = "spAd"),
-              #                               "Late Juveniles" = "redDrumLateJuvenile",
-              #                               "Adults" = "redDrumAdult",
-              #                               "Spawning Adults" = "redDrumSpawningAdult",
-              #                               "Spawning Adults2" = "redSnapperSpawningAdult"), ##JF
-              #                             multiple=FALSE, selected = "redDrumSpawningAdult"))),
-              # style="text-align: center;")
-      
+              
     ))
       
       
