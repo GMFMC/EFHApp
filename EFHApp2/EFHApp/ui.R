@@ -11,16 +11,18 @@ ui <- dashboardPage(
   dashboardHeader(title="Essential Fish Habitat Application"),
   dashboardSidebar(
     sidebarMenu(id = "tab",
-      menuItem ("Welcome", tabName = "welcome"),
-      menuItem("Species Profile", tabName = "sp"),
-      menuItem("Habitat Association Table", tabName = "HAT"),
-      menuItem("Bibliography",tabName="bib"),
-      menuItem("EFH Maps",tabName="map"),
+      menuItem ("Start", tabName = "welcome",icon=icon("home")),
+      menuItem("Species Profile", tabName = "sp",icon=icon("file-text-o")),
+      menuItem("Habitat Association Table", tabName = "HAT",
+               icon=icon("table")),
+      menuItem("Bibliography",tabName="bib",icon=icon("list")),
+      menuItem("EFH Maps",tabName="map",icon=icon("globe")),
       tags$hr(style="border-color: white;"),
       tags$head(includeCSS("efhStyle.css")),
       
       ### Selector for species ###
-      
+      conditionalPanel(condition="input.tab != 'welcome'",
+                       #tags$hr(style="border-color: white;"),
       div(
         selectInput("selectSpecies", h3("Select species:"),
                     c("Almaco jack" = "ALMACOJACK",
@@ -64,7 +66,7 @@ ui <- dashboardPage(
                       "Yellowtail snapper" = "YELLOWTAILSNAPPER"
                       
                     ),
-                      selected = "REDDRUM")),
+                      selected = "REDDRUM"))),
       
        ### conditional Panel displays when species is fish and map tab is selected ###
       conditionalPanel(condition="input.tab == 'map' && output.groupsID == '1'",
@@ -111,11 +113,11 @@ ui <- dashboardPage(
       
       tags$hr(style="text-align: center;"),
     
-    div(img(src="logo.png"), style="text-align: center;"),
+    div(tags$a(img(src="logo.png"),href="http://gulfcouncil.org/index.php"),align='center'),
     br(),
     br(),
-    div(tags$a(href="mailto: portal@gulfcouncil.org", "Contact us",style="color:#1890a8; font-size: 150%; 
-               font-weight: bold; "), align="center")
+    div(tags$a(href="mailto: portal@gulfcouncil.org", "Contact us",style="color:white; 
+               font-size:25px; "), align="center")
     
     
   )),

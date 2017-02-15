@@ -42,9 +42,9 @@ load("globalData.RData")
 # }
 # 
 # #### This file contains code to load species profiles, HATs, and all charts ####
-# source("r.R") 
-# 
-# #### Load CSV with map tile URLs ####
+# source("r.R")
+# #
+# # #### Load CSV with map tile URLs ####
 # a <- read.csv('maplayersWMS.csv')
 # 
 # #### Load CSV that assigns unique group IDs to fish, shrimp, spiny lobster ####
@@ -54,7 +54,7 @@ load("globalData.RData")
 # ### MapBox Attribution##
 # 
 # map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>Mapbox</a>"
-
+# 
 # load("ER1.RData")
 # load("ER2.RData")
 # load("ER3.RData")
