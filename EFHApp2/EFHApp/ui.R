@@ -7,7 +7,8 @@
 #    http://shiny.rstudio.com/
 #
 
-ui <- dashboardPage(
+ui <- function(request){
+  dashboardPage( 
   dashboardHeader(title="Essential Fish Habitat Application"),
   dashboardSidebar(
     sidebarMenu(id = "tab",
@@ -111,6 +112,10 @@ ui <- dashboardPage(
                                      selected = 'adult'))
       ),
       
+      bookmarkButton(title=HTML('Click here to bookmark the current page with selections retained.
+                                Generates a URL to return here.')),
+     
+      
       tags$hr(style="text-align: center;"),
     
     div(tags$a(img(src="logo.png"),href="http://gulfcouncil.org/index.php"),align='center'),
@@ -120,9 +125,10 @@ ui <- dashboardPage(
                font-size:25px; "), align="center")
     
     
+    
   )),
   dashboardBody(
-    
+    #bookmarkButton(),
      tags$style(type = "text/css", "#map {height: calc(100vh - 80px) !important;}"),
      #tags$style(type = "text/css", "#sp {height: calc(100vh - 80px) !important;}"),
     tabItems(
@@ -227,4 +233,4 @@ ui <- dashboardPage(
     ))
       
       
-    )
+    )}

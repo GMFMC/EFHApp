@@ -13,7 +13,8 @@ library(DT)
 #### mapview is currently incompatiable with one of these other packages ####
 #library(mapview)
 library(rgdal)
-load("globalData.RData")
+#load("globalData.RData")
+enableBookmarking(store = "url")
 
 
 ## For use when we figure out how to get ESRI WMS tiles working ##
@@ -26,43 +27,43 @@ load("globalData.RData")
 
 ### read in references CSV (must be coded in UTF8 or search will fail when pushed to web ###
 
-# bib<-read.csv("referencesCombined1.csv", na.strings=".")
-# 
-# ## remove extraneous columns ##
-# x<-bib[c(2,4,6,7,8)]
-# 
-# x$Journal<-as.character(x$Journal)
-# x$Journal[is.na(x$Journal)] <- " "
-# 
-# #### load Welcome Map .shp files ####
-# 
-# listRdata<-dir(pattern="*.RData")
-# for(i in 1:8){
-#   load(listRdata[i])
-# }
-# 
+bib<-read.csv("referencesCombined1.csv", na.strings=".")
+
+## remove extraneous columns ##
+x<-bib[c(2,4,6,7,8)]
+
+x$Journal<-as.character(x$Journal)
+x$Journal[is.na(x$Journal)] <- " "
+
+#### load Welcome Map .shp files ####
+
+listRdata<-dir(pattern="*.RData")
+for(i in 1:8){
+  load(listRdata[i])
+}
+#
 # #### This file contains code to load species profiles, HATs, and all charts ####
-# source("r.R")
+ source("r.R")
 # #
 # # #### Load CSV with map tile URLs ####
-# a <- read.csv('maplayersWMS.csv')
-# 
-# #### Load CSV that assigns unique group IDs to fish, shrimp, spiny lobster ####
-# 
-# b<- read.csv('groupsID.csv')
-# 
-# ### MapBox Attribution##
-# 
-# map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>Mapbox</a>"
-# 
-# load("ER1.RData")
-# load("ER2.RData")
-# load("ER3.RData")
-# load("ER4.RData")
-# load("ER5.RData")
-# load("est.RData")
-# load("near.RData")
-# load("off.RData")
+a <- read.csv('maplayersWMS.csv')
+
+#### Load CSV that assigns unique group IDs to fish, shrimp, spiny lobster ####
+
+b<- read.csv('groupsID.csv')
+
+### MapBox Attribution##
+
+map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>Mapbox</a>"
+
+load("ER1.RData")
+load("ER2.RData")
+load("ER3.RData")
+load("ER4.RData")
+load("ER5.RData")
+load("est.RData")
+load("near.RData")
+load("off.RData")
 
 #ER1 <- readOGR(dsn="ER1.shp",layer="ER1")
 # ER2 <- readOGR(dsn="ER2.shp",layer="ER2")
