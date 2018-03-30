@@ -1,4 +1,4 @@
-setwd("C:/Users/claire.GMFMC/Desktop/R (2)/R/EFHwGit/EFHApp")
+setwd("C:/Users/claire.GMFMC/Desktop/WFH files/R (2)/R/EFHwGit/EFHApp")
 
 RSland<-read.csv("Red Snapper Landings 1986-2015.csv",na.strings = "NA")
 #RDland<-RDland[c(-65,-66),]

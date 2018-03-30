@@ -227,8 +227,9 @@ ui <- function(request){
 ################################# EFH Map ############################################################
       tabItem(tabName='map',
               includeCSS("legendStyle.css"),
-              leafletOutput('map',height=600)),
-              tableOutput('speciesTable')
+              leafletOutput('map',height=600))#,
+              #tableOutput('speciesTable'),
+              #textOutput('tblXX'))
               
     ))
       

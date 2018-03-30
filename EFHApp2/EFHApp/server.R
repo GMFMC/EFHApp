@@ -461,6 +461,10 @@ server <- function(input, output) {
     
   })
   
+  # output$tblXX <- renderText({
+  #   maplayer2()
+  # })
+  
   ############################# END EFH MAPS TAB ###############################
   
 } ## end server
